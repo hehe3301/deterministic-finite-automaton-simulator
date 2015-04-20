@@ -23,7 +23,7 @@ public class State {
 	 * @param letter
 	 *            - the character to parse
 	 * @param state
-	 *            - the state the charicter will cause a transition to
+	 *            - the state the character will cause a transition to
 	 */
 	public void addTransition(String letter, State state) {
 		transitions.put(name, state);

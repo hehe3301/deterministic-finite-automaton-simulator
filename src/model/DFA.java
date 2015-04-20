@@ -49,6 +49,17 @@ public class DFA {
 	}
 
 	/**
+	 * This method sets a state an accepting state if it exists or creates it if it does not
+	 * @param start - the state to be made accepting
+	 */
+	public void setAcceptingState(String good) {
+		if (!states.contains(good)) {
+			states.put(good, new State(good));
+		}// if
+		states.get(good).setAcceptState();
+	}
+	
+	/**
 	 * this methoid parses a string using the DFA
 	 * 
 	 * @param stringIn
