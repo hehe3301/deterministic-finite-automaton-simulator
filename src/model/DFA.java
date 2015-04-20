@@ -4,8 +4,9 @@ import java.util.Hashtable;
 
 public class DFA {
 
-	public String toRead = new String();
+	
 	public Hashtable<String,State> states;
+	public State startState;
 	
 	public DFA(){
 		states= new Hashtable<String,State>();
@@ -21,5 +22,21 @@ public class DFA {
 		states.get(start).addTransition(letter, states.get(end));
 	}
 	
-	public boolean 
+	public void setStartState(String start){
+		startState = states.get(start);
+	}
+	
+	public boolean parseString(String stringIn){
+		State current = startState;
+		String toRead = stringIn;
+		while(toRead.length()>1){
+			String head = toRead.substring(0,0);
+			toRead = toRead.substring(1, toRead.length()-1);
+			current=current.getNextState(head);
+		}
+		String head = toRead.substring(0);
+		current=current.getNextState(head);
+		return current.isAcceptState();
+		
+	}
 }
