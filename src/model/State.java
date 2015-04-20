@@ -1,21 +1,33 @@
 package model;
 
-import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class State {
 	private String name;
-	private Dictionary<String, State> transitions = null;
-
+	private Hashtable<String, State> transitions = null;
+	private boolean isAcceptState = false;
+	
 	public State(String name) {
 		this.name = name;
 	}
 
-	public void addTransition(String name, State state) {
+	public void addTransition(String letter, State state) {
 		transitions.put(name, state);
 	}
 	
-	public State getNextState(String in){
-		return transitions.get(in);
+	public State getNextState(String letter){
+		return transitions.get(letter);
 	}
 
+	public String getName(){
+		return this.name;
+	}
+	
+	public void setAcceptState(){
+		isAcceptState = true;
+	}
+	
+	public boolean isAcceptState(){
+		return isAcceptState;
+	}
 }
