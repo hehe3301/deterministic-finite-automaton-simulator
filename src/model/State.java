@@ -26,6 +26,9 @@ public class State {
 	 *            - the state the character will cause a transition to
 	 */
 	public void addTransition(String letter, State state) {
+		if(transitions==null){
+			transitions = new Hashtable<String,State>();
+		}
 		transitions.put(name, state);
 	}
 
