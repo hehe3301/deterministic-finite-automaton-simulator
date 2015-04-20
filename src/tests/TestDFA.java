@@ -13,10 +13,10 @@ public class TestDFA {
 		dfa.addTransition("II", "b", "IV");
 		dfa.addTransition("III", "a", "IV");
 		dfa.addTransition("III", "b", "I");
-		dfa.addTransition("IV", "z", "III");
+		dfa.addTransition("IV", "a", "III");
 		dfa.addTransition("IV", "b", "II");
 		dfa.setAcceptingState("III");
-		System.out.println("Test string true:" +dfa.parseString("ababbabab", false));
+		System.out.println("Test string true:" +dfa.parseString("ababbabab", true));
 		
 
 	}

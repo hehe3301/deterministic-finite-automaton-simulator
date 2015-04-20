@@ -8,8 +8,9 @@ import java.util.Hashtable;
  */
 public class DFA {
 
-	public Hashtable<String, State> states;
-	public State startState;
+	private Hashtable<String, State> states;
+	private State startState;
+	private String toRead;
 
 	public DFA() {
 		states = new Hashtable<String, State>();
@@ -59,6 +60,11 @@ public class DFA {
 		states.get(good).setAcceptState();
 	}
 	
+	public void printStatus(){
+		System.out.println("Current state is: " + startState.getName());
+		System.out.println("String left to parse is: " + toRead);
+	}
+	
 	/**
 	 * this methoid parses a string using the DFA
 	 * 
@@ -70,8 +76,9 @@ public class DFA {
 	 */
 	public boolean parseString(String stringIn, boolean debug) {
 		State current = startState;
-		String toRead = stringIn;
+		toRead = stringIn;
 		while (toRead.length() > 1) {
+			if(debug) printStatus();
 			String head = toRead.substring(0, 0);
 			toRead = toRead.substring(1, toRead.length() - 1);
 			current = current.getNextState(head);

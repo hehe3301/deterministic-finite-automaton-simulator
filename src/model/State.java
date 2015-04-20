@@ -1,10 +1,11 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class State {
 	private String name;
-	private Hashtable<String, State> transitions = null;
+	private Hashtable<String, State> transitions = new Hashtable<String,State>();
 	private boolean isAcceptState = false;
 
 	/**
@@ -26,9 +27,6 @@ public class State {
 	 *            - the state the character will cause a transition to
 	 */
 	public void addTransition(String letter, State state) {
-		if(transitions==null){
-			transitions = new Hashtable<String,State>();
-		}
 		transitions.put(name, state);
 	}
 
@@ -68,5 +66,17 @@ public class State {
 	 */
 	public boolean isAcceptState() {
 		return isAcceptState;
+	}
+	
+	
+	public String toString(){
+		String out = "State: "+this.name+"\n";
+		ArrayList<String> keys = (ArrayList<String>) transitions.keys();
+		keys.sort(null);
+		for(String trans : keys){
+			out+=""+trans+"->"+transitions.get(trans).getName()+"\n";
+		}
+		return out;
+		
 	}
 }
