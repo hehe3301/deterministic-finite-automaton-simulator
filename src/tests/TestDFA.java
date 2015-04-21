@@ -16,7 +16,12 @@ public class TestDFA {
 		dfa.addTransition("IV", "a", "III");
 		dfa.addTransition("IV", "b", "II");
 		dfa.setAcceptingState("III");
-		System.out.println("Test string true:" +dfa.parseString("ababbabab", true));
+		System.out.println(dfa);
+		System.out.println("Test string 'aba' true:" +dfa.parseString("aba", false));
+		System.out.println("Test string 'abab' false:" +dfa.parseString("abab", false));
+		System.out.println("Test string 'ababbabab' true:" +dfa.parseString("ababbabab", false));
+		
+		
 		
 
 	}

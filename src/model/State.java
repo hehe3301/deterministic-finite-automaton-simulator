@@ -3,10 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+
 public class State {
 	private String name;
-	private Hashtable<String, State> transitions = new Hashtable<String,State>();
+	private Hashtable<String, State> transitions;
 	private boolean isAcceptState = false;
+	private ArrayList<String> alph;
 
 	/**
 	 * Public constructor for State objects
@@ -16,6 +18,8 @@ public class State {
 	 */
 	public State(String name) {
 		this.name = name;
+		alph = new ArrayList<String>();
+		transitions = new Hashtable<String,State>();
 	}
 
 	/**
@@ -27,7 +31,8 @@ public class State {
 	 *            - the state the character will cause a transition to
 	 */
 	public void addTransition(String letter, State state) {
-		transitions.put(name, state);
+		alph.add(letter);
+		transitions.put(letter, state);
 	}
 
 	/**
@@ -39,7 +44,8 @@ public class State {
 	 * @return - the State object of the state that should be next based on the
 	 *         letter
 	 */
-	public State getNextState(String letter) {
+	public State getNextState(String letter, boolean debug) {
+		if(debug) {this.printState(); System.out.println("Reading letter: "+letter);}
 		return transitions.get(letter);
 	}
 
@@ -69,14 +75,11 @@ public class State {
 	}
 	
 	
-	public String toString(){
-		String out = "State: "+this.name+"\n";
-		ArrayList<String> keys = (ArrayList<String>) transitions.keys();
-		keys.sort(null);
-		for(String trans : keys){
-			out+=""+trans+"->"+transitions.get(trans).getName()+"\n";
+	public void printState(){
+		System.out.println("State: "+this.name);
+		for(String letter : alph){
+			System.out.println("	"+letter+"->"+transitions.get(letter).name);
 		}
-		return out;
-		
+				
 	}
 }
